@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <odoo>
 
     <record id="storage_backend_view_tree" model="ir.ui.view">
