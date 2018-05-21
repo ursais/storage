@@ -1,2 +1,2 @@
-keychain https://github.com/OCA/server-auth 11.0
-component https://github.com/OCA/connector 11.0
+server-auth
+connector
