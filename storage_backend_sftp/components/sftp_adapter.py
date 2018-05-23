@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Akretion (http://www.akretion.com).
-# @author Sébastien BEAU <sebastien.beau@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
@@ -22,7 +20,7 @@ except ImportError as err:
 def sftp_mkdirs(client, path, mode=511):
     try:
         client.mkdir(path, mode)
-    except IOError, e:
+    except IOError as e:
         if e.errno == errno.ENOENT and path:
             sftp_mkdirs(client, os.path.dirname(path), mode=mode)
             client.mkdir(path, mode)
@@ -53,7 +51,7 @@ class SftpStorageBackend(Component):
             if dirname:
                 try:
                     client.stat(dirname)
-                except IOError, e:
+                except IOError as e:
                     if e.errno == errno.ENOENT:
                         sftp_mkdirs(client, dirname)
                     else:
@@ -74,7 +72,7 @@ class SftpStorageBackend(Component):
         with sftp(self.collection) as client:
             try:
                 return client.listdir(full_path)
-            except IOError, e:
+            except IOError as e:
                 if e.errno == errno.ENOENT:
                     # The path do not exist return an empty list
                     return []
