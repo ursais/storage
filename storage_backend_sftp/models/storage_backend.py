@@ -41,14 +41,14 @@ class StorageBackend(models.Model):
                     (self.sftp_server, self.sftp_port))
             transport.connect(username=self.sftp_login, password=password)
         except Exception as e:
-            raise Warning(_('Exception details\n\n%s' % e))
+            raise UserError(_('Exception details\n\n%s' % e))
         return transport
 
     def _close_stfp_connection(self, transport):
         try:
             transport.close()
         except Exception as e:
-            raise Warning(_('Exception details\n\n%s' % e))
+            raise UserError(_('Exception details\n\n%s' % e))
         return
 
     @api.multi
@@ -58,6 +58,6 @@ class StorageBackend(models.Model):
             transport = self._get_stfp_connection()
             self._close_stfp_connection(transport)
         except Exception as e:
-            raise Warning(_('Exception details\n\n%s' % e))
+            raise UserError(_('Exception details\n\n%s' % e))
         # Not a user error but a quick way to send feedback
         raise UserError(_('Test connection successful.'))
