@@ -37,8 +37,7 @@ class StorageBackend(models.Model):
         try:
             account = self._get_keychain_account()
             password = account.get_password()
-            transport = paramiko.Transport(
-                    (self.sftp_server, self.sftp_port))
+            transport = paramiko.Transport((self.sftp_server, self.sftp_port))
             transport.connect(username=self.sftp_login, password=password)
         except Exception as e:
             raise UserError(_('Exception details\n\n%s' % e))
